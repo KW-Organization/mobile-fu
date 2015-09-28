@@ -23,15 +23,15 @@ class InstanceMethodDummy
 
   include ActionController::MobileFu::InstanceMethods
 
-  attr_accessor :user_agent
+  attr_accessor :user_agent, :headers
 
   def request
     @request ||= begin
       r = Object.new
       r.stubs(:user_agent).returns user_agent
+      r.stubs(:headers).returns({'user-agent' => user_agent})
       r
     end
   end
 
 end
-
